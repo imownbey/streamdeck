@@ -37,6 +37,8 @@ type Client struct {
 }
 
 func NewClient(ctx context.Context, params RegistrationParams) *Client {
+	file, _ := os.OpenFile("logs.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
+	logger = log.New(file, "streamdeck.log", log.Ldate|log.Ltime|log.Lshortfile)
 	return &Client{
 		ctx:     ctx,
 		params:  params,
